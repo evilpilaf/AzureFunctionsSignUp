@@ -7,12 +7,12 @@ namespace SignUp.core
 {
     public sealed class Course
     {
-        public int Id { get; }
+        public Guid Id { get; }
         public string Name { get; }
         public int Capacity { get; }
         public HashSet<Guid> RegisteredStudents;
 
-        public Course(int id, string name, int capacity, HashSet<Guid> registeredUsers)
+        public Course(Guid id, string name, int capacity, HashSet<Guid> registeredUsers)
         {
             Id = id;
             Name = name;

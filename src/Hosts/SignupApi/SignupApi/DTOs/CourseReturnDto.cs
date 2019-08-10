@@ -1,10 +1,12 @@
 ﻿using SignUp.core;
 
+using System;
+
 namespace SignupApi.DTOs
 {
     public readonly struct CourseReturnDto
     {
-        public int Id { get; }
+        public Guid Id { get; }
         public string Name { get; }
         public int Capacity { get; }
         public int RegisteredUsers { get; }

@@ -15,7 +15,7 @@ namespace SignUp.core
             _courseLoader = courseLoader;
         }
 
-        public async Task<Result> Execute(Guid studentId, int courseId)
+        public async Task<Result> Execute(Guid studentId, Guid courseId)
         {
             var courseResult = await _courseLoader.GetCourse(courseId);
             Result result;

@@ -33,9 +33,9 @@ namespace SignupApi
         public async Task<IActionResult> SignUp(
             [HttpTrigger(AuthorizationLevel.Function,
                          "post",
-                         Route = "api/courses/{courseId}/students/{studentId:guid}")]
+                         Route = "api/courses/{courseId:guid}/students/{studentId:guid}")]
             HttpRequest _,
-            int courseId,
+            string courseId,
             string studentId)
         {
             if (!Guid.TryParse(studentId, out var studentGuid))
@@ -43,10 +43,15 @@ namespace SignupApi
                 _logger.Warning("Received invalid student id {studentId}", studentId);
                 return new BadRequestResult();
             }
+            if (!Guid.TryParse(courseId, out var courseGuid))
+            {
+                _logger.Warning("Received invalid course id {courseId}", courseId);
+                return new BadRequestResult();
+            }
 
             try
             {
-                var result = await _signUpToCourseV1.Execute(studentGuid, courseId);
+                var result = await _signUpToCourseV1.Execute(studentGuid, courseGuid);
 
                 if (result.IsSuccess)
                 {
