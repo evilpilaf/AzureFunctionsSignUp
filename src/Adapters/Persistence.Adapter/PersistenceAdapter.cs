@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.DependencyInjection;
 
 using SignUp.core.Ports;
 
-using SimpleInjector;
+using Container = SimpleInjector.Container;
 
 namespace Persistence.Adapter
 {
@@ -10,15 +11,17 @@ namespace Persistence.Adapter
     {
         private readonly Container _container;
 
-        public PersistenceAdapter()
+        public PersistenceAdapter(PersistenceAdapterSettings settings)
         {
             _container = new Container();
-            _container.Register<ICourseLoader, CourseLoaderInMemory>();
+            _container.Register<CosmosClient>(() =>
+                new CosmosClient(settings.AccountEndpoint, settings.AccountKey));
+            _container.Register<ICourseLoader, CourseLoaderCosmosDb>();
         }
 
         public void Register(IServiceCollection hostContainer)
         {
-            hostContainer.AddScoped<ICourseLoader>(_ => _container.GetInstance<ICourseLoader>());
+            hostContainer.AddScoped(_ => _container.GetInstance<ICourseLoader>());
         }
     }
 }

@@ -34,7 +34,7 @@ namespace SignupApi
             [HttpTrigger(AuthorizationLevel.Function,
                          "post",
                          Route = "api/courses/{courseId:guid}/students/{studentId:guid}")]
-            HttpRequest _,
+            HttpRequest req,
             string courseId,
             string studentId)
         {
@@ -82,7 +82,7 @@ namespace SignupApi
             [HttpTrigger(AuthorizationLevel.Function,
                          "get",
                          Route = "api/courses/")]
-            HttpRequest _)
+            HttpRequest req)
         {
             try
             {

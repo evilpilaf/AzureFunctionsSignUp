@@ -15,6 +15,8 @@ namespace SignupApi
 {
     public class Startup : FunctionsStartup
     {
+        private FunctionSettings _settings;
+
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var config = new ConfigurationBuilder()
@@ -22,11 +24,12 @@ namespace SignupApi
                 .AddEnvironmentVariables()
                 .Build();
 
+            _settings = config.Get<FunctionSettings>();
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console(new CompactJsonFormatter())
-                .WriteTo.ApplicationInsights(config.GetValue<string>("AppInsightsInstrumentationKey"),
-                    new TraceTelemetryConverter())
+                .WriteTo.ApplicationInsights(_settings.AppInsightsInstrumentationKey, new TraceTelemetryConverter())
                 .CreateLogger();
 
             BuildContainer(builder.Services);
@@ -39,7 +42,11 @@ namespace SignupApi
         {
             Bootstrapper.Register(serviceCollection);
 
-            var persistenceAdapter = new PersistenceAdapter();
+            var adapterSettings = new PersistenceAdapterSettings(
+                accountEndpoint: _settings.CosmosDbAccountEndpoint,
+                accountKey: _settings.CosmosDbAccountKey);
+
+            var persistenceAdapter = new PersistenceAdapter(adapterSettings);
             persistenceAdapter.Register(serviceCollection);
         }
     }
