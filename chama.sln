@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignupApi", "src\Hosts\Sign
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{F09690A3-462E-4301-A4C6-5B3FA131BB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Adapter", "Adapters\Persistence.Adapter\Persistence.Adapter.csproj", "{7297A1CD-C619-45AF-B183-01230D759C37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Adapter", "src\Adapters\Persistence.Adapter\Persistence.Adapter.csproj", "{7297A1CD-C619-45AF-B183-01230D759C37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

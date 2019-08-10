@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\signup.core\signup.core.csproj" />
+    <ProjectReference Include="..\..\signup.core\signup.core.csproj" />
   </ItemGroup>
 
 </Project>
