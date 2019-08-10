@@ -1,4 +1,5 @@
 ﻿using SignUp.core;
+using SignUp.core.Exceptions;
 using SignUp.core.Ports;
 using SignUp.core.ValueObjects;
 
@@ -6,15 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SignUp.core.Exceptions;
 
 namespace Persistence.Adapter
 {
-    internal sealed class CourseLoaderCosmosDb : ICourseLoader
+    internal sealed class CourseLoaderInMemory : ICourseLoader
     {
         private readonly Dictionary<int, Course> _courses;
 
-        public CourseLoaderCosmosDb()
+        public CourseLoaderInMemory()
         {
             _courses = new Dictionary<int, Course>()
             {

@@ -17,7 +17,7 @@ namespace SignUp.core
             Id = id;
             Name = name;
             Capacity = capacity;
-            RegisteredStudents = new HashSet<Guid>();
+            RegisteredStudents = registeredUsers;
         }
 
         public Result RegisterStudent(Guid studentId)
@@ -34,7 +34,6 @@ namespace SignUp.core
                     return Result.Success();
                 }
             }
-
             return new Exception("The course is fully booked");
         }
     }

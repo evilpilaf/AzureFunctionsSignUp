@@ -13,7 +13,7 @@ namespace Persistence.Adapter
         public PersistenceAdapter()
         {
             _container = new Container();
-            _container.Register<ICourseLoader, CourseLoaderCosmosDb>();
+            _container.Register<ICourseLoader, CourseLoaderInMemory>();
         }
 
         public void Register(IServiceCollection hostContainer)
