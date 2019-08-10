@@ -6,12 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SignUp.core.Exceptions;
 
 namespace Persistence.Adapter
 {
     internal sealed class CourseLoaderCosmosDb : ICourseLoader
     {
-        private Dictionary<int, Course> _courses;
+        private readonly Dictionary<int, Course> _courses;
 
         public CourseLoaderCosmosDb()
         {
@@ -29,8 +30,14 @@ namespace Persistence.Adapter
 
         public Task<Result<Course>> GetCourse(int courseId)
         {
-            Result<Course> course = _courses[courseId];
-            return Task.FromResult(course);
+            Result<Course> courseResult;
+            if (_courses.ContainsKey(courseId))
+            {
+                courseResult = _courses[courseId];
+                return Task.FromResult(courseResult);
+            }
+            courseResult = new CourseNotFoundException(courseId);
+            return Task.FromResult(courseResult);
         }
     }
 }

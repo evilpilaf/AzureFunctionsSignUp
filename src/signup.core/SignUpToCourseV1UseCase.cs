@@ -1,7 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using SignUp.core.Ports;
+﻿using SignUp.core.Ports;
 using SignUp.core.ValueObjects;
+
+using System;
+using System.Threading.Tasks;
 
 namespace SignUp.core
 {
@@ -26,7 +27,7 @@ namespace SignUp.core
             else
             {
                 result = courseResult;
-            };
+            }
 
             return result;
         }

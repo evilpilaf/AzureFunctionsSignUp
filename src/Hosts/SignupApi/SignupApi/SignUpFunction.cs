@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 
-using Newtonsoft.Json;
-
 using Serilog;
 
 using SignUp.core;
+using SignUp.core.Exceptions;
 using SignUp.core.ValueObjects;
 
 using System;
@@ -58,12 +57,18 @@ namespace SignupApi
                     return new InternalServerErrorResult();
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error(e,
-                    "Exception when trying to register a new student {StudentId} to the course {CourseId}", 1,
-                    courseId);
-                return new InternalServerErrorResult();
+                switch (ex)
+                {
+                    case CourseNotFoundException _:
+                        return new NotFoundResult();
+                    default:
+                        _logger.Error(ex,
+                            "Exception when trying to register a new student {StudentId} to the course {CourseId}", 1,
+                            courseId);
+                        return new InternalServerErrorResult();
+                }
             }
         }
 
