@@ -10,5 +10,6 @@ namespace SignUp.core.Ports
     {
         Task<Result<IEnumerable<Course>>> GetAllCourses();
         Task<Result<Course>> GetCourse(Guid courseId);
+        Task<Result> UpdateCourse(Course course);
     }
 }

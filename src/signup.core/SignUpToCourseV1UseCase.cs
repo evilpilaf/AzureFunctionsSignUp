@@ -23,6 +23,10 @@ namespace SignUp.core
             {
                 Course course = courseResult;
                 result = course.RegisterStudent(studentId);
+                if (result.IsSuccess)
+                {
+                    result = await _courseLoader.UpdateCourse(course);
+                }
             }
             else
             {

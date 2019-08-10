@@ -44,5 +44,10 @@ namespace Persistence.Adapter
             courseResult = new CourseNotFoundException(courseId);
             return Task.FromResult(courseResult);
         }
+
+        public Task<Result> UpdateCourse(Course course)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
