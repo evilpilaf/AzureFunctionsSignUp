@@ -1,0 +1,214 @@
+{
+  "type": "Container",
+  "scope": "Course Sign-Up system",
+  "description": "The system landscape diagram for the course sign-up system.",
+  "size": "A2_Landscape",
+
+
+  "elements": [
+    {
+      "type": "Person",
+      "name": "Analyst",
+      "description": "An analyst which will review statistics from the courses.",
+      "tags": "External",
+      "position": "2820,765"
+    },
+    {
+      "type": "Software System",
+      "name": "Course Sign-Up system",
+      "description": "The sign up system for the online courses",
+      "tags": "Internal",
+      "containers": [
+        {
+          "type": "Container",
+          "name": "Course Database",
+          "description": "Contains information on the current open courses and the students",
+          "technology": "SQL, Cosmos",
+          "tags": "Database, Internal",
+          "position": "3270,2395"
+        },
+        {
+          "type": "Container",
+          "name": "Course notification service",
+          "description": "Sends emails to users with the result of the course sign-up request.",
+          "technology": "c#, function, Azure",
+          "tags": "Internal",
+          "position": "4376,1680"
+        },
+        {
+          "type": "Container",
+          "name": "Course sign-up worker",
+          "description": "Executes sign-up requests from students to courses",
+          "technology": "c#, worker",
+          "tags": "Internal",
+          "position": "4375,2420"
+        },
+        {
+          "type": "Container",
+          "name": "Course statistics API",
+          "description": "API to retrieve statistics for the courses",
+          "technology": "c#, asp mvc core",
+          "tags": "Internal",
+          "position": "2805,1705"
+        },
+        {
+          "type": "Container",
+          "name": "Sign-Up API",
+          "description": "API to allow users to sign up to courses",
+          "technology": "c#, asp mvc core",
+          "tags": "Internal",
+          "position": "3720,1685"
+        }
+      ]
+    },
+    {
+      "type": "Person",
+      "name": "Student",
+      "description": "A student that signs up to courses",
+      "tags": "External",
+      "position": "4025,745"
+    }
+  ],
+
+
+  "relationships": [
+    {
+      "source": "Analyst",
+      "description": "Reviews statistics from courses",
+      "technology": "",
+      "destination": "Course Sign-Up system",
+      "tags": ""
+    },
+    {
+      "source": "Analyst",
+      "description": "Reviews statistics from courses",
+      "technology": "HTTPS",
+      "destination": "Course statistics API",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Course notification service",
+      "description": "Sends email with result of course sign-up request",
+      "technology": "SMTP, MailChimp",
+      "destination": "Student",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Course sign-up worker",
+      "description": "Signs up to courses",
+      "technology": "",
+      "destination": "Course Database",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Course sign-up worker",
+      "description": "Signs up to courses",
+      "technology": "Azure, EventGrid",
+      "destination": "Course notification service",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Course statistics API",
+      "description": "Gets course information",
+      "technology": "",
+      "destination": "Course Database",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Sign-Up API",
+      "description": "Signs up to courses",
+      "technology": "Queue, Azure",
+      "destination": "Course sign-up worker",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Sign-Up API",
+      "description": "Adds students to a course",
+      "technology": "",
+      "destination": "Course Database",
+      "tags": "",
+      "vertices": []
+    },
+    {
+      "source": "Student",
+      "description": "Signs up to courses",
+      "technology": "",
+      "destination": "Course Sign-Up system",
+      "tags": ""
+    },
+    {
+      "source": "Student",
+      "description": "Signs up to courses",
+      "technology": "HTTPS",
+      "destination": "Sign-Up API",
+      "tags": "",
+      "vertices": []
+    }
+  ],
+
+
+  "styles": [
+    {
+      "type": "element",
+      "description": "",
+      "tag": "Database",
+      "width": "",
+      "height": "",
+      "background": "",
+      "color": "",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "Cylinder",
+      "metadata": ""
+    },
+    {
+      "type": "element",
+      "description": "",
+      "tag": "External",
+      "width": "",
+      "height": "",
+      "background": "#c0c0c0",
+      "color": "",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "",
+      "metadata": ""
+    },
+    {
+      "type": "element",
+      "description": "",
+      "tag": "Internal",
+      "width": "",
+      "height": "",
+      "background": "#0000ff",
+      "color": "",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "",
+      "metadata": ""
+    },
+    {
+      "type": "element",
+      "description": "",
+      "tag": "Person",
+      "width": "",
+      "height": "",
+      "background": "",
+      "color": "",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "Person",
+      "metadata": ""
+    }
+  ]
+}
